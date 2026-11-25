@@ -29,24 +29,26 @@ document.querySelectorAll('.accordion button').forEach((button) => {
 });
 
 const lightbox = document.querySelector('.lightbox');
-const lightboxImage = lightbox.querySelector('img');
-const closeLightbox = () => {
-  lightbox.classList.remove('visible');
-  lightbox.setAttribute('aria-hidden', 'true');
-};
+if (lightbox) {
+  const lightboxImage = lightbox.querySelector('img');
+  const closeLightbox = () => {
+    lightbox.classList.remove('visible');
+    lightbox.setAttribute('aria-hidden', 'true');
+  };
 
-document.querySelectorAll('.gallery-grid button').forEach((button) => {
-  button.addEventListener('click', () => {
-    lightboxImage.src = button.dataset.image;
-    lightbox.classList.add('visible');
-    lightbox.setAttribute('aria-hidden', 'false');
+  document.querySelectorAll('.gallery-grid button').forEach((button) => {
+    button.addEventListener('click', () => {
+      lightboxImage.src = button.dataset.image;
+      lightbox.classList.add('visible');
+      lightbox.setAttribute('aria-hidden', 'false');
+    });
   });
-});
 
-lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', (event) => {
-  if (event.target === lightbox) closeLightbox();
-});
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') closeLightbox();
-});
+  lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeLightbox();
+  });
+}
